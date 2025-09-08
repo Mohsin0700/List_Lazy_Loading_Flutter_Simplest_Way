@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lazyloading/views/products.dart';
 import 'package:lazyloading/views/users.dart';
 
 void main() {
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
@@ -19,7 +21,8 @@ class MyApp extends StatelessWidget {
         ),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const Users(),
+      // home: const Users(),
+      home: const Products(),
     );
   }
 }
