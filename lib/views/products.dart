@@ -61,40 +61,49 @@ class _ProductsState extends State<Products> {
         title: const Text("Products"),
         actions: [Text(_products.length.toString())],
       ),
-      body: ListView.builder(
-        physics: BouncingScrollPhysics(),
-        itemCount: _products.length + (hasMoreProducts ? 1 : 0),
-        controller: _scrollController,
-        itemBuilder: (context, index) {
-          if (index < _products.length) {
-            return Container(
-              margin: EdgeInsets.only(top: 20),
-              child: Card(
-                child: Column(
-                  children: [
-                    SizedBox(height: 10),
-                    Text(
-                      _products[index].title ?? "No Title",
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+      body: SizedBox(
+        height: 300,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          physics: BouncingScrollPhysics(),
+          itemCount: _products.length + (hasMoreProducts ? 1 : 0),
+          controller: _scrollController,
+          itemBuilder: (context, index) {
+            if (index < _products.length) {
+              return Container(
+                margin: EdgeInsets.only(top: 20),
+                height: 200,
+                width: 200,
+                child: Card(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(height: 10),
+                      Text(
+                        textAlign: TextAlign.center,
+                        _products[index].title ?? "No Title",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                  ],
+                      SizedBox(height: 10),
+                      Image.network(_products[index].images![0], height: 150),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          } else {
-            return isLoading
-                ? const Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Center(child: CircularProgressIndicator()),
-                  )
-                : const SizedBox();
-          }
-        },
+              );
+            } else {
+              return isLoading
+                  ? const Padding(
+                      padding: EdgeInsets.all(16.0),
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  : const SizedBox();
+            }
+          },
+        ),
       ),
     );
   }
